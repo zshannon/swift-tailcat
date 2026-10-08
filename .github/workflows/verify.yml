@@ -1,0 +1,49 @@
+name: Manual verification
+
+"on":
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  cancel-in-progress: true
+  group: swift-tailcat-manual-${{ github.ref }}
+
+jobs:
+  verify:
+    runs-on: macos-xl
+    timeout-minutes: 90
+    env:
+      TAILCAT_BUILD_JOBS: 2
+      TAILCAT_LOCAL_ARTIFACT: "1"
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install pinned Go without persistent caches
+        uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          cache: false
+          go-version: "1.27.1"
+      - name: Show selected toolchain
+        run: |
+          swift --version
+          xcodebuild -version
+      - name: Verify Go bridge with race detection
+        shell: bash
+        run: |
+          Scripts/test-go.sh
+      - name: Build pinned binary from the source-only checkout
+        run: Scripts/build-xcframework.sh
+      - name: Verify artifact and Swift API on every architecture
+        run: |
+          Scripts/verify-artifact.py
+          Scripts/check-platforms.sh
+      - name: Run Swift loopback integration
+        run: Scripts/test-swift.sh
+      - name: Verify fresh Swift-only consumer
+        run: Scripts/test-consumer.sh
+
+# Deliberately no push/PR/scheduled triggers, uploads or persistent Actions caches.
+# Runner-local products disappear with the runner. Nothing publishes a release.

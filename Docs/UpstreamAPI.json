@@ -1,0 +1,337 @@
+[
+  {
+    "file": "connblob_deprecated.go",
+    "line": 14,
+    "signature": "func (s *Server) ConnBlob() ConnBlob"
+  },
+  {
+    "file": "connblob_deprecated.go",
+    "line": 21,
+    "signature": "func (ci *ConnInfo) ConnBlob() ConnBlob"
+  },
+  {
+    "file": "connblob_deprecated.go",
+    "line": 28,
+    "signature": "func ParseConnBlobRaw(addr ConnBlob) (any, error)"
+  },
+  {
+    "file": "connblob_deprecated.go",
+    "line": 35,
+    "signature": "func ParseConnBlob(addr ConnBlob) (ConnInfo, error)"
+  },
+  {
+    "file": "disco.go",
+    "line": 26,
+    "signature": "func IsMeowPacket(pkt []byte) bool"
+  },
+  {
+    "file": "disco.go",
+    "line": 32,
+    "signature": "func EncodeMeowPing(nodeKey key.NodePublic, discoKey key.DiscoPublic) []byte"
+  },
+  {
+    "file": "disco.go",
+    "line": 42,
+    "signature": "func EncodeMeowed() []byte"
+  },
+  {
+    "file": "disco.go",
+    "line": 52,
+    "signature": "func ParseMeowPing(pkt []byte) (nodeKey key.NodePublic, discoKey key.DiscoPublic, ok bool)"
+  },
+  {
+    "file": "disco.go",
+    "line": 68,
+    "signature": "func IsMeowedPacket(pkt []byte) bool"
+  },
+  {
+    "file": "keyset.go",
+    "line": 34,
+    "signature": "func (s *KeySet) Add(k key.NodePublic)"
+  },
+  {
+    "file": "keyset.go",
+    "line": 42,
+    "signature": "func (s *KeySet) Remove(k key.NodePublic)"
+  },
+  {
+    "file": "keyset.go",
+    "line": 49,
+    "signature": "func (s *KeySet) Contains(k key.NodePublic) bool"
+  },
+  {
+    "file": "listen.go",
+    "line": 36,
+    "signature": "func (s *Server) Listen(ctx context.Context, network, address string) (net.Listener, error)"
+  },
+  {
+    "file": "pickregion.go",
+    "line": 25,
+    "signature": "func PickBestRegion(ctx context.Context, dm *tailcfg.DERPMap) (regionID tailcfg.DERPRegionID, err error)"
+  },
+  {
+    "file": "pickregion_js.go",
+    "line": 19,
+    "signature": "func PickBestRegion(ctx context.Context, dm *tailcfg.DERPMap) (regionID tailcfg.DERPRegionID, err error)"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 212,
+    "signature": "func NewPresharedKey() (ret PresharedKey)"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 222,
+    "signature": "func (p PresharedKey) IsZero() bool"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 228,
+    "signature": "func (p PresharedKey) Equal(q PresharedKey) bool"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 233,
+    "signature": "func (p PresharedKey) MarshalBinary() ([]byte, error)"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 238,
+    "signature": "func (p *PresharedKey) UnmarshalBinary(x []byte) error"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 247,
+    "signature": "func (p PresharedKey) MarshalText() ([]byte, error)"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 255,
+    "signature": "func (p *PresharedKey) UnmarshalText(x []byte) error"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 269,
+    "signature": "func (a DiscoPublic) Equal(b DiscoPublic) bool"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 274,
+    "signature": "func (p DiscoPublic) MarshalBinary() ([]byte, error)"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 279,
+    "signature": "func (p *DiscoPublic) UnmarshalBinary(x []byte) error"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 289,
+    "signature": "func (p NodePublic) MarshalBinary() ([]byte, error)"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 294,
+    "signature": "func (p *NodePublic) UnmarshalBinary(x []byte) error"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 303,
+    "signature": "func (a NodePublic) Equal(b NodePublic) bool"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 319,
+    "signature": "func NewPrivateKey() *PrivateKey"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 591,
+    "signature": "func (s *Server) Start() error"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 880,
+    "signature": "func (s *Server) Addr() netip.Addr"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 884,
+    "signature": "func (s *Server) Close() error"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 914,
+    "signature": "func (s *Server) DrainTCP(ctx context.Context) error"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 944,
+    "signature": "func (c *Client) DrainTCP(ctx context.Context) error"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 1003,
+    "signature": "func (s *Server) DisconnectClient(k key.NodePublic) bool"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 1016,
+    "signature": "func (s *Server) TailcatAddr() Addr"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 1064,
+    "signature": "func (ci *ConnInfo) Addr() Addr"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 1110,
+    "signature": "func (a Addr) Resolve(ctx context.Context, opts ...any) (Addr, error)"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 1152,
+    "signature": "func ParseAddrRaw(addr Addr) (any, error)"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 1159,
+    "signature": "func ParseAddr(addr Addr) (ConnInfo, error)"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 1218,
+    "signature": "func FetchDERPMap(ctx context.Context, opts ...any) (*tailcfg.DERPMap, error)"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 1362,
+    "signature": "func (ci *ConnInfo) Expand(ctx context.Context, opts ...any) error"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 1486,
+    "signature": "func (s *Server) PeerKey(remote net.Addr) (_ key.NodePublic, ok bool)"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 1976,
+    "signature": "func NewClient(server Addr) *Client"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 2093,
+    "signature": "func (c *Client) PublicKey() key.NodePublic"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 2103,
+    "signature": "func (c *Client) DERPRegion() *tailcfg.DERPRegion"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 2113,
+    "signature": "func (c *Client) Close() error"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 2188,
+    "signature": "func (c *Client) Ping(ctx context.Context) (PingResult, error)"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 2258,
+    "signature": "func (c *Client) DiscoPing(ctx context.Context) (*ipnstate.PingResult, error)"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 2306,
+    "signature": "func (c *Client) Dial(ctx context.Context, network, addr string) (net.Conn, error)"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 2315,
+    "signature": "func (c *Client) DialTCPPort(ctx context.Context, port uint16) (net.Conn, error)"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 2332,
+    "signature": "func (c *Client) DialTCP(ctx context.Context, ap netip.AddrPort) (net.Conn, error)"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 2348,
+    "signature": "func (c *Client) DialUDPPort(ctx context.Context, port uint16) (ConnPacketConn, error)"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 2360,
+    "signature": "func (c *Client) DialUDP(ctx context.Context, ap netip.AddrPort) (ConnPacketConn, error)"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 2401,
+    "signature": "func ProxyConns(a, b net.Conn)"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 2492,
+    "signature": "func ProxyPacketConns(a, b ConnPacketConn)"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 2609,
+    "signature": "func (s *Server) Status() *ipnstate.Status"
+  },
+  {
+    "file": "tailcat.go",
+    "line": 2632,
+    "signature": "func DiscoPublicForNode(k key.NodePrivate) DiscoPublic"
+  },
+  {
+    "file": "tailcat_exec.go",
+    "line": 26,
+    "signature": "func (s *Server) ExecConnHandler(argv []string) func(net.Conn)"
+  },
+  {
+    "file": "tailcat_exec.go",
+    "line": 47,
+    "signature": "func (s *Server) PeerEnv(local, remote net.Addr) []string"
+  },
+  {
+    "file": "tailcat_ssh.go",
+    "line": 33,
+    "signature": "func SupportsSSHServer() bool"
+  },
+  {
+    "file": "tailcat_ssh.go",
+    "line": 37,
+    "signature": "func (s *Server) HandleTailscaleSSHConn(c net.Conn)"
+  },
+  {
+    "file": "tailcat_ssh.go",
+    "line": 56,
+    "signature": "func (s *Server) SSHConnHandler(opts SSHOptions) func(net.Conn)"
+  },
+  {
+    "file": "tailcat_ssh_keys.go",
+    "line": 22,
+    "signature": "func ValidateSSHAuthorizedKeys(texts []string) error"
+  },
+  {
+    "file": "tailcat_ssh_stub.go",
+    "line": 14,
+    "signature": "func SupportsSSHServer() bool"
+  },
+  {
+    "file": "tailcat_ssh_stub.go",
+    "line": 16,
+    "signature": "func (s *Server) HandleTailscaleSSHConn(c net.Conn)"
+  },
+  {
+    "file": "tailcat_ssh_stub.go",
+    "line": 22,
+    "signature": "func (s *Server) SSHConnHandler(opts SSHOptions) func(net.Conn)"
+  }
+]

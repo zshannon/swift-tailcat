@@ -1,0 +1,2 @@
+# Preserve the exact upstream README, including its original whitespace.
+Docs/UpstreamREADME.md -whitespace

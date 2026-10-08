@@ -1,0 +1,68 @@
+name: Manual release
+
+"on":
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Semantic release version (for example 0.0.1)
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  cancel-in-progress: false
+  group: swift-tailcat-release-${{ github.repository }}-${{ inputs.version }}
+
+jobs:
+  release:
+    env:
+      TAILCAT_BUILD_JOBS: 2
+      TAILCAT_LOCAL_ARTIFACT: "1"
+      TAILCAT_RELEASE_VERSION: ${{ inputs.version }}
+    if: github.event_name == 'workflow_dispatch' && github.repository == 'zshannon/swift-tailcat' && github.ref == 'refs/heads/main'
+    permissions:
+      contents: write
+    runs-on: macos-xl
+    timeout-minutes: 90
+    steps:
+      - name: Check out the triggering main source commit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.sha }}
+      - name: Require the separately reviewed initial payload for 0.0.1
+        run: |
+          if [ "$TAILCAT_RELEASE_VERSION" = "0.0.1" ]; then
+            echo "Use the reviewed prepared-initial payload for 0.0.1; do not rebuild it here." >&2
+            exit 1
+          fi
+      - name: Exercise source-only packaging and publication failure handling
+        run: python3 -B -m unittest discover -s Scripts/tests -v
+      - name: Install pinned Go without persistent caches
+        uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          cache: false
+          go-version: "1.27.1"
+      - name: Build the pinned Go bridge and five Apple architectures
+        run: Scripts/build-xcframework.sh
+      - name: Verify binary provenance, notices and architecture metadata
+        run: python3 -B Scripts/verify-artifact.py
+      - name: Compile and link the Swift API for all five architectures
+        run: Scripts/check-platforms.sh
+      - name: Verify Go bridge with race detection
+        run: Scripts/test-go.sh
+      - name: Run Swift loopback integration
+        run: Scripts/test-swift.sh
+      - name: Verify a fresh Swift-only consumer using the built fixture
+        run: Scripts/test-consumer.sh
+      - name: Prepare source and separate binary payloads
+        run: python3 -B Scripts/prepare-release.py --version "$TAILCAT_RELEASE_VERSION" --commit "$GITHUB_SHA" --output "$RUNNER_TEMP/swift-tailcat-release"
+      - env:
+          GH_HOST: github.com
+          GH_PROMPT_DISABLED: "1"
+          GH_TOKEN: ${{ github.token }}
+        name: Create the URL/checksum package tag and publish complete Release assets
+        run: python3 -B Scripts/publish-release.py "$RUNNER_TEMP/swift-tailcat-release"

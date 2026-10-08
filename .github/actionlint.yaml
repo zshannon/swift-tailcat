@@ -1,0 +1,4 @@
+# Existing Crayon/Slick Apple runner scale-set label; no hosted fallback.
+self-hosted-runner:
+  labels:
+    - macos-xl

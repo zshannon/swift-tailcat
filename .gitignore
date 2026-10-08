@@ -1,0 +1,7 @@
+.DS_Store
+.build/
+.build-tools/
+Artifacts/
+Bridge/.cache/
+Bridge/mobile/*_test_cache*
+.swiftpm/
